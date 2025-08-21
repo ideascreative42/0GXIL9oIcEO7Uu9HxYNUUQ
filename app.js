@@ -57,7 +57,7 @@ const SYSTEM_MESSAGE = [
  */
 
 
-
+app.set('trust proxy', 1);
 app.use(cookie_parser())
 
 app.use(express.json({limit:'10kb'}))
@@ -550,4 +550,5 @@ app.get("/story/:id/download", async (req, res) => {
 
 app.listen(5500,()=>{
     console.log("listening to port 5500")
+
 })
