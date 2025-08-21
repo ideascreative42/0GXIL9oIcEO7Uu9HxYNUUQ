@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#29054B">
+    <link rel="apple-touch-icon" href="/icons/maskable-192.png">
+
+    <script src="/install.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        :root{
+            --clr-txt-primary:white;
+            --clr-txt-secondary:rgb(68, 68, 68);
+            --clr-txt-accent:black;
+
+            --clr-bg-primary:#29054B;
+            --clr-bg-accent:white;
+            --clr-bg-secondary:pink;
+        }
+        body, p , h1, h2, h3{
+            margin: 0; padding: 0;
+        }
+        body{
+            background-color: var(--clr-bg-primary);
+            height: 96vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+        header{
+            position: fixed;
+            top:3px;
+            right: 2px;
+            left: 2px;
+            /* border: 2px solid black; */
+            border-radius: 0.8rem;
+            margin: 0.6rem 0.5rem;
+            padding: 0.9rem 0.9rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.9);
+
+
+            
+            z-index: 3;
+            background-color: var(--clr-bg-primary);
+        }
+        header h1{
+            color: var(--clr-txt-primary);
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+        }
+        .entry{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: auto;  
+        }
+        .entry h2{
+            padding: 1.8rem;
+            color: var(--clr-txt-primary);
+            text-align: center;
+        }
+        .entry form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.9rem;
+
+        }
+        .username , .pass {
+            font-size: 16px;
+            padding: 0.6rem 0.9rem;
+            background-color: var(--clr-bg-secondary);
+            min-width: 230px;
+            max-width: 400px;
+        }
+        .username::placeholder , .pass::placeholder{
+            color: var(--clr-txt-secondary);
+        }
+
+        .submit{
+            background-color: var(--clr-bg-accent);
+            color: var(--clr-txt-accent);
+
+            padding: 0.74rem 1.2rem;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 0.3rem;
+        }
+        .submit:disabled{
+            opacity: 0.4;
+            color: rgb(80, 80, 80);
+        }
+        .username , .pass , .submit{
+            border-radius: 0.7rem;
+            border: none;
+        }
+
+        .director_to_another_auth_type{
+            color: var(--clr-txt-primary);
+
+            margin-top: 8px;
+        }
+        .director_to_another_auth_type a{
+            color: var(--clr-txt-primary);
+            text-underline-offset:1px;
+        }
+
+
+        #install-btn{
+            position: fixed;
+            top: 30%;left: 10px;
+
+            cursor: pointer;
+            z-index: 9;
+
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.4rem;
+            
+        }
+
+        .error{
+            position: fixed;
+
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+
+            max-width: 86vw;
+            width: max-content;
+
+            padding: 0.5rem 0.65rem;
+
+            background-color: black;
+            border:3px solid rgb(177, 19, 19);
+            border-radius: 0.5rem;
+            /* box-shadow: 0 0 3px rgba(255,255,255,0.4); */
+            color: var(--clr-txt-primary);
+
+            animation: errorAnimation 4s ease-out;
+        }
+        @keyframes errorAnimation {
+            0% {
+                bottom: 2%;
+                opacity: 0;
+            }
+            10%{
+                bottom: 15%;
+                opacity: 1;
+            }
+            94% {
+                bottom: 15%;
+                opacity: 1;
+            }
+            100%{
+                bottom: 2%;
+                opacity: 0;
+            }
+        }
+        .error p{
+            line-height: 1.2em;
+            font-size: 18px;
+            min-width: 0;
+            /* word-break: break-all; */
+        }
+        .error svg{
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teknofest</h1>
+    </header>
+
+    <section class="entry">
+        <h2>Sign Up</h2>
+        <form action="" id="form">
+            <input class="username" type="text" placeholder="Username" id="username" minlength="4" maxlength="24" required>
+            <input class="pass" type="password" placeholder="Password" id="pass" minlength="8" maxlength="24" required>
+            <input class="submit" type="submit" value="Sign Up" id="submit">
+            <div class="director_to_another_auth_type">already have an account? <a href="/login">Login</a></div>
+        </form>
+    </section>
+
+    <section class="error" id="error">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+        fill="currentColor" viewBox="0 0 24 24" >
+            <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+            <path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
+        </svg>
+        <p id="error-message"></p>
+    </section>
+
+    <button id="install-btn" style="display:none" onclick="triggerInstall()">Uygulamayı indir</button>
+
+
+    <script>
+        //inputs
+        const submit=document.getElementById('submit');
+        const username=document.getElementById('username')
+        const pass=document.getElementById('pass')
+
+        //errors
+        const errorParent=document.getElementById('error')
+        
+        const err_msg=document.getElementById('error-message')
+
+        const form=document.getElementById('form');
+
+        form.onsubmit=async(e)=>{
+            try{
+                e.preventDefault();
+                submit.disabled = true;
+                // if(!username.value || !pass.value){
+
+                // }
+                const rawReq=await fetch(`${window.location.origin}/signup`,{
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({username:username.value , pass: pass.value})
+                })
+                const postRes=await rawReq.json();
+                if(postRes.ok){
+                    //its done, send to where it says to redirect it
+
+                    window.location.replace(postRes.redirect);
+                    submit.disabled = false;
+                    return;
+                }
+                else{
+                    //it failed , show error
+                    err_msg.innerText=postRes.error || "something went wrong, try again later"
+                    errorParent.style.display='flex'
+                    setTimeout(() => {
+                        errorParent.style.display='none'
+                        submit.disabled = false;
+                    }, 4000);
+                }
+            }
+            catch (err) {
+                err_msg.innerText = "network error, try again later";
+                errorParent.style.display = 'flex';
+
+                setTimeout(() => {
+                    errorParent.style.display = 'none';
+                    submit.disabled = false;
+                }, 4000);
+
+                return;
+            }
+        }
+
+        // submit.onclick=async (e)=>{
+        //     try{
+        //         e.preventDefault();
+        //         submit.disabled = true;
+        //         // if(!username.value || !pass.value){
+
+        //         // }
+        //         const rawReq=await fetch(`${window.location.origin}/signup`,{
+        //             method: 'POST',
+        //             headers: { "Content-Type": "application/json" },
+        //             body: JSON.stringify({username:username.value , pass: pass.value})
+        //         })
+        //         const postRes=await rawReq.json();
+        //         if(postRes.ok){
+        //             //its done, send to where it says to redirect it
+
+        //             window.location.replace(postRes.redirect);
+        //             submit.disabled = false;
+        //             return;
+        //         }
+        //         else{
+        //             //it failed , show error
+        //             err_msg.innerText=postRes.error || "something went wrong, try again later"
+        //             errorParent.style.display='flex'
+        //             setTimeout(() => {
+        //                 errorParent.style.display='none'
+        //                 submit.disabled = false;
+        //             }, 4000);
+        //         }
+        //     }
+        //     catch (err) {
+        //         err_msg.innerText = "network error, try again later";
+        //         errorParent.style.display = 'flex';
+
+        //         setTimeout(() => {
+        //             errorParent.style.display = 'none';
+        //             submit.disabled = false;
+        //         }, 4000);
+
+        //         return;
+        //     }
+        // }
+    </script>
+
+</body>
+</html>

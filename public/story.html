@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/story.css">
+    <style>
+        :root{
+            --clr-txt-primary:white;
+            --clr-txt-secondary:rgb(68, 68, 68);
+            --clr-txt-accent:black;
+
+            --clr-bg-primary:#29054B;
+            --clr-bg-accent:white;
+            --clr-bg-secondary:pink;
+        }
+        body, p , h1, h2, h3{
+            margin: 0; padding: 0;
+        }
+        body{
+            background-color: var(--clr-bg-primary);
+            /* display: flex;
+            align-items: center; */
+
+            padding: 0 0.74rem;
+            /* height: 96vh;
+
+            justify-content: center; */
+
+            padding-bottom: 15px;
+
+            scroll-behavior: smooth;
+
+            position: relative;
+        }
+        header{
+            position: fixed;
+            top:3px;
+            right: 2px;
+            left: 2px;
+            /* border: 2px solid black; */
+            border-radius: 0.8rem;
+            margin: 0.6rem 0.5rem;
+            padding: 0.9rem 0.9rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.9);
+
+            
+            z-index: 3;
+            background-color: var(--clr-bg-primary);
+        }
+        header h1{
+            color: var(--clr-txt-primary);
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+        }
+
+
+        /* .board{
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: transparent;
+
+            padding:2rem;
+            max-width: 540px;
+            margin: 100px auto;
+
+            box-shadow: 0 0 10px rgba(0,0,0,0.9);
+
+            border-radius: 0.8rem;
+
+            color: var(--clr-txt-primary);
+        }
+
+        .board form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .board input[type='text']{
+            font-size: 17px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.5rem;
+            min-height: 0px;
+            border: none;
+        } */
+
+
+        .saved{
+            background-color: black;
+            
+        }
+
+        #downloadi{
+            margin-top: 20px;
+        }
+
+        #pwa-controls{
+            /* position: absolute; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.4rem;
+            width: 100%;
+            /* background-color: aquamarine; */
+
+            margin-top: 100px;
+            /* top: 100px; */
+
+        }
+
+        #pwa-controls button{
+            padding: 0.4rem 0.6rem;
+
+            border: none;
+
+            border-radius: 0.4rem;
+
+            cursor: pointer;
+        }
+
+        .homee{
+            position: absolute;
+            left: 10px;
+            top: 50%; transform: translateY(-50%);
+        }
+
+        
+
+
+        .error{
+            position: fixed;
+
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+
+            max-width: 86vw;
+            width: max-content;
+
+            padding: 0.5rem 0.65rem;
+
+            background-color: black;
+            border:3px solid rgb(177, 19, 19);
+            border-radius: 0.5rem;
+            /* box-shadow: 0 0 3px rgba(255,255,255,0.4); */
+            color: var(--clr-txt-primary);
+
+            animation: errorAnimation 4s ease-out;
+        }
+        @keyframes errorAnimation {
+            0% {
+                bottom: 2%;
+                opacity: 0;
+            }
+            10%{
+                bottom: 15%;
+                opacity: 1;
+            }
+            94% {
+                bottom: 15%;
+                opacity: 1;
+            }
+            100%{
+                bottom: 2%;
+                opacity: 0;
+            }
+        }
+        .error p{
+            line-height: 1.2em;
+            font-size: 18px;
+            min-width: 0;
+            /* word-break: break-all; */
+        }
+        .error svg{
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teknofest</h1>
+        <a style="padding: 0.4rem;" class="homee" href="/">
+            <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+            fill="white" viewBox="0 0 24 24" >
+
+            <path d="M3 13h1v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7h1c.4 0 .77-.24.92-.62.15-.37.07-.8-.22-1.09l-8.99-9a.996.996 0 0 0-1.41 0l-9.01 9c-.29.29-.37.72-.22 1.09s.52.62.92.62Zm9-8.59 6 6V20H6v-9.59z"></path>
+            </svg>
+        </a>
+    </header>
+
+
+    <!-- <section class="board">
+        <h2>Story Title</h2>
+        <form action="">
+            <label for="keyword">Keyword</label>
+            <input type="text" placeholder="e.g. home, car , keys ..." id="keyword">
+
+            <label for="raw-story">Story</label>
+            <input type="text" id="raw-story" placeholder="write a Story">
+
+            <label for="prompt">Prompt</label>
+            <input type="text" placeholder="ask AI" id="prompt">
+            
+            <input type="submit" id="submit" value="Ask Help From AI">
+
+            <label for="story">Story</label>
+            <input type="text" id="">
+
+            <div class="story_holder" id="story_main" contentEditable="true"></div>
+        </form>
+    </section> -->
+
+    <!-- <div id="pwa-controls" style="display:none; gap:8px;">
+        <button id="pwa-back">← Geri</button>
+        <button id="pwa-refresh">⟳ Güncelle</button>
+    </div> -->
+
+    <section class="board" id="board">
+
+    </section>
+
+
+    <section class="error" id="error">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+        fill="currentColor" viewBox="0 0 24 24" >
+            <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+            <path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
+        </svg>
+        <p id="error-message"></p>
+    </section>
+
+    <section class="pdf">
+        
+    </section>
+    <!-- <script src="story.js"></script> -->
+
+
+    
+
+<!-- <script>
+  // Show controls only when running installed (standalone/TWA)
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+    if (isStandalone) {
+        document.getElementById('pwa-controls').style.display = 'flex';
+        document.getElementById('board').style.marginTop='20px'
+    }
+
+  // Back: if no history, send them “home” (or wherever makes sense)
+  document.getElementById('pwa-back')?.addEventListener('click', () => {
+    if (history.length > 1) history.back();
+    else window.location.href = '/app'; // your main page
+  });
+
+  // Refresh always hits network
+  document.getElementById('pwa-refresh')?.addEventListener('click', () => {
+    window.location.reload(); // bypasses bfcache, re-runs SW fetch/network
+  });
+</script> -->
+
+    <script>
+
+
+        const errorParent=document.getElementById('error')
+        
+        const err_msg=document.getElementById('error-message')
+        
+        class StoryM{
+            static build(item){
+                const board_main=document.getElementById('board')
+                const board=`
+
+                
+                <h1>${item.title || ''}</h1>
+                <form>
+                    <label for="keys">Anahtar Kelimeler</label>
+                    <textarea name="story" rows="3" placeholder="Örn:kardeşlik, pişmanlık, doğa" id="keys">${item.keyword || ''}</textarea>
+
+                    <label for="story">İnsan yazar Devamı</label>
+                    <textarea name="story" rows="8" placeholder="Bir bölüm daha yazın..." id="story"></textarea>
+
+                    <label for="insctuctor">Yapay Zekaya Yanıt Ver</label>
+                    <textarea name="insctuctor" rows="4" placeholder="yapay zekaya yanıt ver..." id="insctuctor"></textarea>
+
+                    <div id="loading" class="dontshow">yapay zeka metni hazırlıyor<span class="loading-spinner"></span></div>
+                    <div class="buttons">
+                        <input class="submit" type="submit" id="submit" value="Yapay Zeka ile Devam ettir">
+                        <button id="add_to_story">İnsan Devamı ekle</button>
+                    </div>
+
+                </form>
+
+                <h2>Hibrit Hikaye</h2>
+                <div class="story_holder" id="story_main" contentEditable="true">${item.txt || ''}</div>
+                <button id="downloadi">PDF olarak indir</button>
+
+                <div class="footer"><p style="text-align: center;">Powered by TEKNOFEST</p></div>`
+
+                board_main.innerHTML=board;
+            }
+        }
+
+        const main=async()=>{
+            try{    const raw=await fetch(`${window.location.origin}${window.location.pathname}/get`)
+                const init_data=await raw.json()
+
+                if(init_data.ok){
+                    // add it to dom 
+                    StoryM.build(init_data.item);
+                    
+                }
+                else{
+                    err_msg.innerText=init_data.error || "something went wrong, try again later"
+                    errorParent.style.display='flex'
+                    setTimeout(() => {
+                        errorParent.style.display='none'
+                    }, 4000);
+                }
+            }
+            catch(err){
+                console.log(err)
+                err_msg.innerText = "network error, try again later";
+                errorParent.style.display = 'flex';
+
+                setTimeout(() => {
+                    errorParent.style.display = 'none';
+                }, 4000);
+                return;
+            }
+        }
+
+        main().then(v=>buildUp()).catch(v=>{
+            console.log(err)
+            err_msg.innerText = "network error, try again later";
+            errorParent.style.display = 'flex';
+
+            setTimeout(() => {
+                errorParent.style.display = 'none';
+            }, 4000);
+            return;
+        })
+    </script>
+
+    <script>
+        
+
+
+        
+    const buildUp=()=>{
+        try{
+
+            const keys=document.getElementById('keys')
+            const story=document.getElementById('story')
+            const story_main=document.getElementById('story_main')
+
+            const insctuctor=document.getElementById('insctuctor')
+
+            const add_to_story_btn=document.getElementById('add_to_story')
+
+            const prompt_btn=document.getElementById('submit')
+
+            const loading=document.getElementById('loading')
+            const loading_spinner=document.getElementById('loading-spinner')
+
+            keys.onblur=async()=>{
+                //send  keys to backend to save
+                if(!keys.value) return;
+                try{    
+                    const save_keys_raw=await fetch(`${window.location.origin}${window.location.pathname}/add-key`,{
+                            method:'POST',
+                            headers: { "Content-Type": "application/json" },
+                            body:JSON.stringify({keywords:`${keys.value}`})
+                    })
+                    const save_keys=await save_keys_raw.json()
+
+                    if(save_keys.ok){
+                        // nothing need to get done
+                    }
+                    else{
+                        err_msg.innerText=save_keys.error || "something went wrong, try again later"
+                        errorParent.style.display='flex'
+                        setTimeout(() => {
+                            errorParent.style.display='none'
+                        }, 4000);
+                    }
+                }
+                catch(err){
+                    console.log(err)
+                    err_msg.innerText = "network error, try again later";
+                    errorParent.style.display = 'flex';
+
+                    setTimeout(() => {
+                        errorParent.style.display = 'none';
+                    }, 4000);
+                    return;
+                }
+
+            }
+
+            add_to_story_btn.onclick=async(e)=>{
+                try{    
+                    e.preventDefault()
+                    add_to_story_btn.disabled=true;
+
+
+                    if(story.value.length < 2){
+                        //send error
+                    }
+
+                    //send it to backend to get save
+                    const save_story_raw=await fetch(`${window.location.origin}${window.location.pathname}/add-story`,{
+                        method:'POST',
+                        headers: { "Content-Type": "application/json" },
+
+                        body:JSON.stringify({story:`${story_main.textContent || ''}\n${story.value || ''}`})
+                    })
+                    // console.log(story_main.textContent)
+                    const save_story=await save_story_raw.json();
+
+                    if(save_story.ok){
+                        //add it to story from input
+                        const newSpan = document.createElement('span');
+                        newSpan.classList.add('new_txt');
+
+                        story_main.textContent.length=='0'? newSpan.textContent = `${story.value}`: newSpan.textContent = `\n${story.value}`;
+                        
+                        
+                        console.log(newSpan.textContent)
+                        story_main.appendChild(newSpan);
+
+                        story.value=''
+                        add_to_story_btn.disabled=false;
+                    }
+                    else{
+                        // didn't get save
+                        err_msg.innerText=save_story.error || "something went wrong, try again later"
+                        errorParent.style.display='flex'
+                        setTimeout(() => {
+                            errorParent.style.display='none'
+                            add_to_story_btn.disabled=false;
+                        }, 4000);
+
+                    }
+                }
+                catch(err){
+                    console.log(err)
+                    err_msg.innerText = "network error, try again later";
+                    errorParent.style.display = 'flex';
+
+                    setTimeout(() => {
+                        errorParent.style.display = 'none';
+                        add_to_story_btn.disabled=false;
+                    }, 4000);
+                    return;
+                }
+            }
+        
+            prompt_btn.onclick=async(e)=>{
+                try{    
+                    e.preventDefault()
+
+                    prompt_btn.disabled=true
+                    
+                    if(story_main.textContent.length < 5 ){
+                        err_msg.innerText= "write a start for story so AI knows how to continue it"
+                        errorParent.style.display='flex'
+                        setTimeout(() => {
+                            errorParent.style.display='none'
+                            prompt_btn.disabled=false
+                        }, 4000);
+
+                        return;
+                    }
+
+                    const prompt_keywords=keys.value?`keywords:${keys.value}`:''
+                    const prompt_user_prompt=insctuctor.value?`user prompt:${insctuctor.value}`:''
+                    pro_prompt_creation=`
+                    ${prompt_keywords}\n
+                    story:${story_main.textContent}\n
+                    ${prompt_user_prompt} `
+
+
+
+                    //send prompt
+
+
+                    const prompt_send_raw=await fetch(`${window.location.origin}${window.location.pathname}/continue`,{
+                        method:'POST',
+                        headers: { "Content-Type": "application/json" },
+                        body:JSON.stringify({prompt:pro_prompt_creation})
+                    })
+                    const prompt_send=await prompt_send_raw.json()
+
+                    if(prompt_send.ok){
+                        // send story to backend and add to sroty on main
+
+                        //send it to backend to get save
+                        const save_story_raw=await fetch(`${window.location.origin}${window.location.pathname}/add-story`,{
+                            method:'POST',
+                            headers: { "Content-Type": "application/json" },
+
+                            body:JSON.stringify({story:`${story_main.textContent || ''}\n${prompt_send.text || ''}`})
+                        })
+                        // console.log(story_main.textContent)
+                        const save_story=await save_story_raw.json();
+
+                        if(save_story.ok){
+                            //add it to story from input
+                            const newSpan = document.createElement('span');
+                            newSpan.classList.add('new_txt');
+                            
+                            story_main.textContent.length=='0'? newSpan.textContent = `${story.value}`:newSpan.textContent = `\n${story.value}`;
+                            console.log(newSpan.textContent)
+                            story_main.appendChild(newSpan);
+
+                            story.value=''
+                            prompt_btn.disabled=false
+                        }
+                        else{
+                            // didn't get save
+                            err_msg.innerText=save_story.error || "something went wrong, try again later"
+                            errorParent.style.display='flex'
+                            setTimeout(() => {
+                                errorParent.style.display='none'
+                                prompt_btn.disabled=false
+                            }, 4000);
+
+                        }
+
+                        insctuctor.value=''
+
+                    }
+                    else{
+                        // didn't get save
+                        err_msg.innerText=prompt_send.error || "something went wrong, try again later"
+                        errorParent.style.display='flex'
+                        setTimeout(() => {
+                            errorParent.style.display='none'
+                            prompt_btn.disabled=false
+                        }, 4000);
+                    }
+                }
+                catch(err){
+                    console.log(err)
+                    err_msg.innerText = "network error, try again later";
+                    errorParent.style.display = 'flex';
+
+                    setTimeout(() => {
+                        errorParent.style.display = 'none';
+                        prompt_btn.disabled=false
+                    }, 4000);
+                    return;
+                }
+
+            }
+
+            story_main.onblur=async()=>{
+                try{
+                    if(story_main.textContent.length < 2){
+                        //send error
+                        return
+                    }
+                    console.log("meow")
+
+                    const save_story_raw=await fetch(`${window.location.origin}${window.location.pathname}/add-story`,{
+                        method:'POST',
+                        headers: { "Content-Type": "application/json" },
+
+                        body:JSON.stringify({story:`${story_main.innerText}`})
+                    })
+                    // console.log(story_main.textContent)
+                    const save_story=await save_story_raw.json();
+
+                    if(save_story.ok){
+                        //nothig to do I guess
+                    }
+                    else{
+                        // didn't get save
+                        err_msg.innerText=save_story.error || "something went wrong, try again later"
+                        errorParent.style.display='flex'
+                        setTimeout(() => {
+                            errorParent.style.display='none'
+                        }, 4000);
+
+                    }
+                }
+                catch(err){
+                    console.log(err)
+                    err_msg.innerText = "network error, try again later";
+                    errorParent.style.display = 'flex';
+
+                    setTimeout(() => {
+                        errorParent.style.display = 'none';
+                    }, 4000);
+                    return;
+                }
+            }
+        
+        
+
+            const downloadi=document.getElementById('downloadi')
+            downloadi.onclick=()=>{
+                downloadi.disabled=true
+                setTimeout(() => {
+                    window.open(`${window.location.origin}${window.location.pathname}/download`, "_blank");
+                    downloadi.disabled=false
+                }, 3000);
+
+            }
+        }
+
+        
+
+        catch(err){
+            console.log(err)
+            err_msg.innerText = "network error, try again later";
+            errorParent.style.display = 'flex';
+
+            setTimeout(() => {
+                errorParent.style.display = 'none';
+            }, 4000);
+        }
+    }
+
+
+
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted || (performance.getEntriesByType('navigation')[0]?.type === 'back_forward')) {
+            // If your app pulls data with fetch(), call your data-loading function here instead.
+            window.location.reload();
+            }
+        });
+
+    </script>
+</body>
+</html>

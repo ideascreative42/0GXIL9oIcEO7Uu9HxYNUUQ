@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#29054B">
+    <link rel="apple-touch-icon" href="/icons/maskable-192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="/install.js" defer></script>
+    <title>Document</title>
+
+    <style>
+        :root{
+            --clr-txt-primary:white;
+            --clr-txt-secondary:rgb(68, 68, 68);
+            --clr-txt-accent:black;
+
+            --clr-bg-primary:#29054B;
+            --clr-bg-accent:white;
+            --clr-bg-secondary:pink;
+        }
+        body, p , h1, h2, h3{
+            margin: 0; padding: 0;
+        }
+        body{
+            background-color: var(--clr-bg-primary);
+
+            padding-bottom: 15px;
+
+            scroll-behavior: smooth;
+            /* height: 96vh; */
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+
+            position: relative;
+        }
+        header{
+            position: fixed;
+            top:3px;
+            right: 2px;
+            left: 2px;
+            /* border: 2px solid black; */
+            border-radius: 0.8rem;
+            margin: 0.6rem 0.5rem;
+            padding: 0.9rem 0.9rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.9);
+
+            z-index: 3;
+            background-color: var(--clr-bg-primary);
+        }
+        header h1{
+            color: var(--clr-txt-primary);
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+        }
+
+        .hero{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            color: var(--clr-txt-primary);
+
+            margin-top: 11rem;
+        }
+        .hero h2 , .archive h2{
+            font-size: 28px;
+            font-weight: 500;
+            /* letter-spacing: 0.04rem; */
+        }
+        .hero button{
+            display: flex;
+            align-items: center;
+
+            background-color: #DCCAE9;
+
+            gap: 0.5rem;
+            font-size: 16px;
+            
+            padding: 0.6rem 0.8rem;
+
+            border-radius: 0.5rem;
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .archive{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+
+            margin-top: 3.8rem;
+            color: var(--clr-txt-primary);
+        }
+
+        .archive ul{
+            list-style: none;
+            padding: 0 1.6rem;
+
+            margin: 0;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.8rem;
+            /* min-width: 220px;
+            max-width: 400px; */
+        }
+
+        .archive li{
+            box-shadow: 0 0 4px rgba(255 , 255, 255, 0.4);
+
+            align-self: stretch;
+            min-width: 220px;
+            overflow: hidden;
+            border-radius: 0.8rem;
+            border: none;
+
+            color: var(--clr-txt-accent);
+            
+        }
+
+        .archive li a{
+            box-sizing: border-box;
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+
+            padding: 0.6rem 0.8rem 1.3rem 1.2rem;
+
+            background-color: #DCCAE9;
+            text-decoration: none;
+
+
+            min-width: 0;
+            max-width: 400px;
+        }
+
+
+        .archive-date{
+            text-align: right;
+            color: var(--clr-txt-secondary);
+            font-size: 16px;
+        }
+
+        .archive h3{
+            font-size: 20px;
+            color: var(--clr-txt-accent);
+
+            padding-bottom: 0.4rem;
+        }
+
+        .archive ul .archive-story-txt{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            /* white-space: nowrap; */
+            overflow: hidden;           /* hide overflowing text */
+            text-overflow: ellipsis;
+            width: 100%;
+
+            font-size: 16px;
+
+            color: var(--clr-txt-secondary);
+
+            line-height: 1.4rem;
+
+            min-width: 0;
+
+            /* padding-left: 0.4rem; */
+        }
+        
+
+        .new-story{
+            position: fixed;
+            top: 0;bottom: 0;right: 0;left: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 6;
+
+        }
+
+        .new-story form{
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+
+            color: var(--clr-txt-primary);
+            background-color: var(--clr-bg-primary);
+
+            position: relative;
+
+            z-index: 7;
+            padding: 1.6rem 1.8rem 1.7rem;
+
+            border-radius: 1.6rem;
+
+            box-shadow: 0 0 7px rgba(255,255,255,0.4);
+            
+        }
+        
+        .new-story h2{
+            font-weight: 500;
+            font-size: 24px;
+            padding: 0 0 0.6rem 0;
+        }
+
+        .new-story input{
+            font-size: 16px;
+            padding: 0.7rem 0.94rem;
+            background-color: var(--clr-bg-secondary);
+            min-width: 230px;
+            max-width: 400px;
+            
+            border-radius: 0.6rem;
+            border: none;
+        }
+
+        .new-story input::placeholder{
+            color: var(--clr-txt-secondary);
+        }
+
+        .new-story-btns{
+            display: flex;
+            gap: 0.8rem;
+
+        }
+
+        .new-story .cancel-btn ,.new-story .create-btn{
+            font-size: 18px;
+            padding: 0.7rem 1.8rem;
+            border-radius: 0.6rem;
+            cursor: pointer;
+
+        }
+        .new-story .cancel-btn{
+            background-color: transparent;
+            color: var(--clr-txt-primary);
+            border: solid 2px rgb(251, 251, 251);
+        }
+        .new-story .create-btn{
+            background-color: #DCCAE9;
+        }
+
+        .black-background{
+            background-color: rgba(0, 0, 0, 0.6);
+
+            position: fixed;
+            top: 0;bottom: 0;right: 0;left: 0;
+
+            backdrop-filter: blur(1.4px);
+        }
+
+        .no-archive{
+            font-size: 20px;
+            color: rgb(180, 180, 180);
+
+            padding: 0.5rem;
+        }
+
+        #install-btn{
+            position: fixed;
+            top: 30%;left: 10px;
+
+            cursor: pointer;
+            z-index: 9;
+
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.4rem;
+            
+        }
+
+
+
+        .error{
+            position: fixed;
+
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+
+            max-width: 86vw;
+            width: max-content;
+
+            padding: 0.5rem 0.65rem;
+
+            background-color: black;
+            border:3px solid rgb(177, 19, 19);
+            border-radius: 0.5rem;
+            /* box-shadow: 0 0 3px rgba(255,255,255,0.4); */
+            color: var(--clr-txt-primary);
+
+            animation: errorAnimation 4s ease-out;
+
+
+            z-index: 8;
+        }
+        @keyframes errorAnimation {
+            0% {
+                bottom: 2%;
+                opacity: 0;
+            }
+            10%{
+                bottom: 15%;
+                opacity: 1;
+            }
+            94% {
+                bottom: 15%;
+                opacity: 1;
+            }
+            100%{
+                bottom: 2%;
+                opacity: 0;
+            }
+        }
+        .error p{
+            line-height: 1.2em;
+            font-size: 18px;
+            min-width: 0;
+            /* word-break: break-all; */
+        }
+        .error svg{
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teknofest</h1>
+    </header>
+
+    <section class="hero">
+        <h2 class="hero-title">Create Your Own Story</h2>
+        <button class="new-story-btn" id="hero-new-story">
+            <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+            fill="currentColor" viewBox="0 0 24 24" >
+                <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                <path d="M3 13h8v8h2v-8h8v-2h-8V3h-2v8H3z"></path>
+            </svg>
+            <p>New Story</p>
+        </button>
+    </section>
+
+
+    <section class="archive">
+        <h2>Archived Stories</h2>
+        <ul id="archive_list">
+            
+        </ul>
+    </section>
+
+
+    <section class="new-story" id="new-story">
+        <form action="" id="form">
+            <h2>Give Your Story A Title</h2>
+            <input type="text" placeholder="Story Title" minlength="2" maxlength="64" id="title" class="title">
+            <div class="new-story-btns">
+                <button class="cancel-btn" type="button" id="cancel-btn">Cancel</button>
+                <button class="create-btn" type="submit" id="create-btn">Create</button>
+            </div>
+
+        </form>
+
+        <div class="black-background"></div>
+    </section>
+
+
+
+
+    <section class="error" id="error">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+        fill="currentColor" viewBox="0 0 24 24" >
+            <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+            <path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
+        </svg>
+        <p id="error-message"></p>
+    </section>
+
+
+    <button id="install-btn" style="display:none" onclick="triggerInstall()">Uygulamayı indir</button>
+
+    <script>
+
+        const errorParent=document.getElementById('error')
+        
+        const err_msg=document.getElementById('error-message')
+
+        const items_list=document.getElementById('archive_list');
+
+        function formatDateMMDDYY(isoDate) {
+            const d = new Date(isoDate);
+
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            const yy = String(d.getFullYear()).slice(-2);
+            return `${mm} / ${dd} / ${yy}`;
+        }
+
+        class Archive{
+
+            static buildOne(item){
+
+                const li = document.createElement('li');
+
+                const a = document.createElement('a');
+                a.href = `/story/${item.id}`;
+
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'archive-date';
+                dateDiv.textContent = formatDateMMDDYY(item.created_at);
+
+                const h3 = document.createElement('h3');
+                h3.textContent = item.title;
+
+                const p = document.createElement('p');
+                p.className = 'archive-story-txt';
+                p.textContent = item.txt || 'no text yet';
+
+                a.appendChild(dateDiv);
+                a.appendChild(h3);
+                a.appendChild(p);
+                li.appendChild(a);
+
+                return li;
+            }
+        
+            static makeDOM(items){
+                if(items)
+                items.forEach(item => {
+                    items_list.appendChild(this.buildOne(item))
+                });
+            }
+        }
+
+
+        const main=async()=>{
+            try{
+                const rawArchive=await fetch(`${window.location.origin}/archives`);
+                const archive=await rawArchive.json()
+                if(archive.ok){
+                    if(archive.items[0]){
+                        items_list.innerHTML='';
+                        Archive.makeDOM(archive.items);
+                    }
+                    else{
+                        items_list.innerHTML='<p class="no-archive">"no archive story"</p>'
+                    }
+                    
+                }
+                else{
+                    //it failed , show error
+                    if(archive.redirect) return window.location.replace(archive.redirect)
+                    err_msg.innerText=archive.error || "something went wrong, try again later"
+                    errorParent.style.display='flex'
+                    setTimeout(() => {
+                        errorParent.style.display='none'
+                    }, 4000);
+                }
+            }
+            catch(err){
+                console.log(err)
+                err_msg.innerText = "network error, try again later";
+                errorParent.style.display = 'flex';
+
+                setTimeout(() => {
+                    errorParent.style.display = 'none';
+                    items_list.innerHTML='<p class="no-archive">"connect to internet to get archives"</p>';
+                }, 4000);
+
+                
+
+                return;
+            }
+        }
+
+        main()
+
+    </script>
+
+    <script>
+        const hero_new_btn=document.getElementById('hero-new-story')
+        const creator_hidden=document.getElementById('new-story')
+        const cancel_btn=document.getElementById('cancel-btn')
+        const create_btn=document.getElementById('create-btn')
+        const form=document.getElementById('form')
+        const title=document.getElementById('title')
+
+        hero_new_btn.onclick=(e)=>{
+            creator_hidden.style.display='flex'
+            title.focus()
+        }
+        cancel_btn.onclick=(e)=>{
+            e.preventDefault()
+            creator_hidden.style.display='none'
+            title.value=''
+        }
+
+
+        form.onsubmit=async(e)=>{
+            try{    
+                e.preventDefault()
+
+                create_btn.disabled=true;
+
+                //put a loading page on create text or on page
+
+                //send story title to backend
+                const new_story_raw=await fetch('/newstory',{
+                        method: 'POST',
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({title:title.value})
+                    }
+                )
+
+                const new_story_res =await new_story_raw.json()
+                if(new_story_res.ok){
+                    create_btn.disabled=false;
+
+                    window.location.href=new_story_res.redirect;
+                    //redirect to new story page
+                }
+                else{
+                    //it failed , show error
+                    if(archive.redirect) return window.location.replace(archive.redirect)
+                    err_msg.innerText=new_story_res.error || "something went wrong, try again later"
+                    errorParent.style.display='flex'
+                    setTimeout(() => {
+                        errorParent.style.display='none'
+                        create_btn.disabled=false;
+                    }, 4000);
+                    //error log
+                }
+            }
+            catch(err){
+                console.log(err)
+                err_msg.innerText = "network error, try again later";
+                errorParent.style.display = 'flex';
+
+                setTimeout(() => {
+                    errorParent.style.display = 'none';
+                    create_btn.disabled=false;
+                }, 4000);
+                return;
+            }
+            
+        }
+
+
+
+
+
+
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted || (performance.getEntriesByType('navigation')[0]?.type === 'back_forward')) {
+            // If your app pulls data with fetch(), call your data-loading function here instead.
+            window.location.reload();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
