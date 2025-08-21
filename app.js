@@ -548,7 +548,6 @@ app.get("/story/:id/download", async (req, res) => {
 
 
 
-app.listen(5500,()=>{
-    console.log("listening to port 5500")
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on ${port}`));
 
-})
