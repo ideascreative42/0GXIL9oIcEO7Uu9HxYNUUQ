@@ -117,7 +117,6 @@ app.post('/signup',async(req,res)=>{
             secure: true,
             sameSite: 'lax',
             maxAge: process.env.AT_RF_COOKIE_EXP
-            ,partitioned: true
         });
 
         res.cookie('REFRESH_TOKEN', Jwtx.newRT(id , insert_user.rows[0].rt_version), {
@@ -125,7 +124,6 @@ app.post('/signup',async(req,res)=>{
             secure: true,
             sameSite: 'lax',
             maxAge: process.env.AT_RF_COOKIE_EXP
-            ,partitioned: true
         });
 
         //redirect
@@ -168,7 +166,7 @@ app.post('/login' , async(req,res)=>{
             secure: true,
             sameSite: 'lax',
             maxAge: process.env.AT_RF_COOKIE_EXP
-            ,partitioned: true
+            
         });
 
         res.cookie('REFRESH_TOKEN', Jwtx.newRT(user_exists.rows[0].id , user_exists.rows[0].rt_version), {
@@ -176,7 +174,6 @@ app.post('/login' , async(req,res)=>{
             secure: true,
             sameSite: 'lax',
             maxAge: process.env.AT_RF_COOKIE_EXP
-            ,partitioned: true
         });
 
         //redirect
@@ -545,6 +542,7 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
 
