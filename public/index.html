@@ -476,6 +476,7 @@
                 }
             }
             catch(err){
+                console.error(err)
                 console.log(err)
                 err_msg.innerText = "network error, try again later";
                 errorParent.style.display = 'flex';
@@ -578,4 +579,5 @@
     </script>
 
 </body>
+
 </html>
