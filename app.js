@@ -236,9 +236,8 @@ app.use(jwthandler);
 
 
 app.get('/archives',async(req,res)=>{
-    req.user 
-    //get all the chats user got
-    req.user.uid
+
+  console.log('entered')
 
 
     try{    
@@ -546,5 +545,6 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
