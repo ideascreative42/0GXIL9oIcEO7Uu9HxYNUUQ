@@ -31,7 +31,7 @@ class Jwtx{
             try{
                 if(err?.name !=="TokenExpiredError") {
                     res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true,})
-
+console.log('34')
                     throw new Error("invalid jwt")
                 }
                 let RT_obj;
@@ -53,7 +53,7 @@ class Jwtx{
 
                 if(Is_RT_Valid.rowCount===0) {
                     res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true})
-
+console.log('56')
                     throw new Error("expired jwt")
                 }
 
@@ -65,8 +65,8 @@ class Jwtx{
 
                 return RT_obj;
             }
-            catch(error){
-                throw new Error("unauthenticated")
+            catch(error){console.log('68')
+                throw new Error("unauthenticated");
             }
         }
     }
@@ -82,8 +82,10 @@ class Jwtx{
 
 const jwthandler=async (req,res,next)=>{
     try{
-        if(!req.cookies.ACCESS_TOKEN || !req.cookies.REFRESH_TOKEN) 
+        if(!req.cookies.ACCESS_TOKEN || !req.cookies.REFRESH_TOKEN)
+
         {
+            console.log("88")
             throw new Error("not authenticated")
 
         }
@@ -97,11 +99,13 @@ const jwthandler=async (req,res,next)=>{
             uid:JwtVerifyRes.uid,
             r:JwtVerifyRes.r,
         }
+        console.log('meow')
 
         return next();
     }
     catch(err){
         console.log(err)
+        console.log("hello" , err)
         return res.json({ok:false, error:"not authenticated" , redirect:`${process.env.DOMAIN}/login`})
     }
 }
