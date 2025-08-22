@@ -317,6 +317,7 @@
             try{    const raw=await fetch(`${window.location.origin}${window.location.pathname}/get`)
                 const init_data=await raw.json()
 
+console.log(init_data.item)
                 if(init_data.ok){
                     // add it to dom 
                     StoryM.build(init_data.item);
@@ -473,13 +474,16 @@
                     e.preventDefault()
 
                     prompt_btn.disabled=true
+                    loading.classList.add('showLoading')
                     
                     if(story_main.textContent.length < 5 ){
                         err_msg.innerText= "write a start for story so AI knows how to continue it"
                         errorParent.style.display='flex'
+                        loading.classList.remove('showLoading')
                         setTimeout(() => {
                             errorParent.style.display='none'
                             prompt_btn.disabled=false
+
                         }, 4000);
 
                         return;
@@ -522,15 +526,17 @@
                             const newSpan = document.createElement('span');
                             newSpan.classList.add('new_txt');
                             
-                            story_main.textContent.length=='0'? newSpan.textContent = `${story.value}`:newSpan.textContent = `\n${story.value}`;
+                            story_main.textContent.length=='0'? newSpan.textContent = `${prompt_send.text}`:newSpan.textContent = `\n${prompt_send.text}`;
                             console.log(newSpan.textContent)
                             story_main.appendChild(newSpan);
 
                             story.value=''
                             prompt_btn.disabled=false
+                            loading.classList.remove('showLoading')
                         }
                         else{
                             // didn't get save
+                            loading.classList.remove('showLoading')
                             err_msg.innerText=save_story.error || "something went wrong, try again later"
                             errorParent.style.display='flex'
                             setTimeout(() => {
@@ -545,6 +551,7 @@
                     }
                     else{
                         // didn't get save
+                        loading.classList.remove('showLoading')
                         err_msg.innerText=prompt_send.error || "something went wrong, try again later"
                         errorParent.style.display='flex'
                         setTimeout(() => {
@@ -558,6 +565,7 @@
                     err_msg.innerText = "network error, try again later";
                     errorParent.style.display = 'flex';
 
+                    loading.classList.remove('showLoading')
                     setTimeout(() => {
                         errorParent.style.display = 'none';
                         prompt_btn.disabled=false
