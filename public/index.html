@@ -453,7 +453,11 @@
 
         const main=async()=>{
             try{
-                const rawArchive=await fetch(`${window.location.origin}/archives`);
+                const rawArchive=await fetch(`${window.location.origin}/archives`, {
+                  method: 'GET',
+                  credentials: 'include',           // <-- forces cookies to be sent
+                  headers: { 'Accept': 'application/json' }
+                });
                 const archive=await rawArchive.json()
                 if(archive.ok){
                     if(archive.items[0]){
@@ -581,3 +585,4 @@
 </body>
 
 </html>
+
