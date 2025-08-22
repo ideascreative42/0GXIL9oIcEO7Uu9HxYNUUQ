@@ -30,7 +30,7 @@ class Jwtx{
         catch(err){
             try{
                 if(err?.name !=="TokenExpiredError") {
-                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true,})
+                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'})
 console.log('34')
                     throw new Error("invalid jwt")
                 }
@@ -40,7 +40,7 @@ console.log('34')
                     RT_obj = this.verifyRT(RT)
                 }
                 catch(errr){
-                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true})
+                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'})
 
                     throw new Error(errr)
                 }
@@ -52,7 +52,7 @@ console.log('34')
                 ,[RT_obj.uid , RT_obj.ver])
 
                 if(Is_RT_Valid.rowCount===0) {
-                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax',partitioned: true})
+                    res.clearCookie('ACCESS_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'}); res.clearCookie('REFRESH_TOKEN',{httpOnly: true , secure: true , sameSite:'lax'})
 console.log('56')
                     throw new Error("expired jwt")
                 }
@@ -60,7 +60,7 @@ console.log('56')
                 const refreshedAT=this.newAT(RT_obj.uid , RT_obj.uid.r)
 
                 // 2 * 24 * 60 * 60 * 1000 for refresh / 2 days
-                res.cookie('ACCESS_TOKEN',refreshedAT ,{httpOnly: true,secure: true,sameSite: 'lax',partitioned: true,maxAge: Number(process.env.AT_RF_COOKIE_EXP)})
+                res.cookie('ACCESS_TOKEN',refreshedAT ,{httpOnly: true,secure: true,sameSite: 'lax',maxAge: Number(process.env.AT_RF_COOKIE_EXP)})
                 
 
                 return RT_obj;
