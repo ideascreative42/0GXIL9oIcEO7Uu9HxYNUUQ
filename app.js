@@ -223,10 +223,6 @@ app.use((req, res, next) => {
 
 app.use(jwthandler);
 
-app.use((req,res,next)=>{
-  console.log(`USER:${req.user}`)
-  
-})
 
 //user is validated here
 // we got:
@@ -550,4 +546,5 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
