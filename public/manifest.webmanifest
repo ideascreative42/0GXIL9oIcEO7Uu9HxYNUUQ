@@ -1,6 +1,6 @@
 {
-  "name": "Teknofest Stories",
-  "short_name": "Stories",
+  "name": "Hibrit Yazım Modeli",
+  "short_name": "Hibrit Yazım",
   "start_url": "/?source=pwa",
   "scope": "/",
   "id": "/?source=pwa",
@@ -13,4 +13,5 @@
     { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
     { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
+
 }
