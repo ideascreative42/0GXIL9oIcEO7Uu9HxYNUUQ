@@ -533,6 +533,7 @@ console.log(init_data.item)
                             //add it to story from input
                             const newSpan = document.createElement('span');
                             newSpan.classList.add('new_txt');
+                            newSpan.style.color='gray'
                             
                             story_main.textContent.length=='0'? newSpan.textContent = `${prompt_send.text}`:newSpan.textContent = `\n${prompt_send.text}`;
                             console.log(newSpan.textContent)
@@ -663,6 +664,7 @@ console.log(init_data.item)
     </script>
 </body>
 </html>
+
 
 
 
