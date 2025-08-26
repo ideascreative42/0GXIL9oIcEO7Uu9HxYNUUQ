@@ -348,20 +348,20 @@
     </header>
 
     <section class="hero">
-        <h2 class="hero-title">Create Your Own Story</h2>
+        <h2 class="hero-title">Hibrit Düşünce ve Yazım</h2>
         <button class="new-story-btn" id="hero-new-story">
             <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
             fill="currentColor" viewBox="0 0 24 24" >
                 <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
                 <path d="M3 13h8v8h2v-8h8v-2h-8V3h-2v8H3z"></path>
             </svg>
-            <p>New Story</p>
+            <p>Yeni Metin</p>
         </button>
     </section>
 
 
     <section class="archive">
-        <h2>Archived Stories</h2>
+        <h2>Arşiv</h2>
         <ul id="archive_list">
             
         </ul>
@@ -370,11 +370,11 @@
 
     <section class="new-story" id="new-story">
         <form action="" id="form">
-            <h2>Give Your Story A Title</h2>
-            <input type="text" placeholder="Story Title" minlength="2" maxlength="64" id="title" class="title">
+            <h2>Başlık Giriniz</h2>
+            <input type="text" placeholder="Metin Başlığı" minlength="2" maxlength="64" id="title" class="title">
             <div class="new-story-btns">
-                <button class="cancel-btn" type="button" id="cancel-btn">Cancel</button>
-                <button class="create-btn" type="submit" id="create-btn">Create</button>
+                <button class="cancel-btn" type="button" id="cancel-btn">İptal</button>
+                <button class="create-btn" type="submit" id="create-btn">Olştur</button>
             </div>
 
         </form>
@@ -432,7 +432,7 @@
 
                 const p = document.createElement('p');
                 p.className = 'archive-story-txt';
-                p.textContent = item.txt || 'no text yet';
+                p.textContent = item.txt || 'içerik yok';
 
                 a.appendChild(dateDiv);
                 a.appendChild(h3);
@@ -585,5 +585,6 @@
 </body>
 
 </html>
+
 
 
