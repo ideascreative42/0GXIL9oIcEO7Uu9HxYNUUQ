@@ -288,19 +288,27 @@
                 <form>
                     <label for="keys">Anahtar Kelimeler</label>
                     <textarea name="story" rows="3" placeholder="Örn:kardeşlik, pişmanlık, doğa" id="keys">${item.keyword || ''}</textarea>
-
+    
                     <label for="story">İnsan yazar Devamı</label>
-                    <textarea name="story" rows="8" placeholder="Bir bölüm daha yazın..." id="story"></textarea>
-
-                    <label for="insctuctor">Yapay Zekaya Yanıt Ver</label>
-                    <textarea name="insctuctor" rows="4" placeholder="yapay zekaya yanıt ver..." id="insctuctor"></textarea>
-
-                    <div id="loading" class="dontshow">yapay zeka metni hazırlıyor<span class="loading-spinner"></span></div>
-                    <div class="buttons">
-                        <input class="submit" type="submit" id="submit" value="Yapay Zeka ile Devam ettir">
+    
+                    <div class="new-input">
+                        <textarea name="story" rows="8" placeholder="Bir bölüm daha yazın..." id="story"></textarea>
                         <button id="add_to_story">İnsan Devamı ekle</button>
                     </div>
-
+    
+    
+                    <label for="insctuctor">Yapay Zekaya Yanıt Ver</label>
+                    
+    
+                    <div class="new-input">
+                        <textarea name="insctuctor" rows="4" placeholder="yapay zekaya yanıt ver..." id="insctuctor"></textarea>
+                        <input class="submit" type="submit" id="submit" value="Yapay Zeka ile Devam ettir">
+                    </div>
+    
+    
+                    
+    
+                    <div id="loading" class="dontshow">yapay zeka metni hazırlıyor<span class="loading-spinner"></span></div>
                 </form>
 
                 <h2>Hibrit Hikaye</h2>
@@ -655,4 +663,5 @@ console.log(init_data.item)
     </script>
 </body>
 </html>
+
 
