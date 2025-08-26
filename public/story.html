@@ -287,12 +287,12 @@
                 <h1>${item.title || ''}</h1>
                 <form>
                     <label for="keys">Anahtar Kelimeler</label>
-                    <textarea name="story" rows="3" placeholder="Örn:kardeşlik, pişmanlık, doğa" id="keys">${item.keyword || ''}</textarea>
+                    <textarea style="border:red solid 2px;" name="story" rows="3" placeholder="Örn:kardeşlik, pişmanlık, doğa" id="keys">${item.keyword || ''}</textarea>
     
                     <label for="story">İnsan Yazar</label>
     
                     <div class="new-input">
-                        <textarea name="story" rows="8" placeholder="Bir bölüm daha yazın..." id="story"></textarea>
+                        <textarea style="border:red solid 2px;" name="story" rows="8" placeholder="Bir bölüm daha yazın..." id="story"></textarea>
                         <button id="add_to_story">Ekle</button>
                     </div>
     
@@ -301,7 +301,7 @@
                     
     
                     <div class="new-input">
-                        <textarea name="insctuctor" rows="4" placeholder="yapay zekaya istem gir..." id="insctuctor"></textarea>
+                        <textarea style="border:red solid 2px;" name="insctuctor" rows="4" placeholder="yapay zekaya istem gir..." id="insctuctor"></textarea>
                         <input class="submit" type="submit" id="submit" value="Yapay Zekadan Metnini İste">
                     </div>
     
@@ -312,7 +312,7 @@
                 </form>
 
                 <h2>Hibrit Hikaye</h2>
-                <div class="story_holder" id="story_main" contentEditable="true">${item.txt || ''}</div>
+                <div style="border:red solid 2px;" class="story_holder" id="story_main" contentEditable="true">${item.txt || ''}</div>
                 <button id="downloadi">PDF olarak indir</button>
 
                 <div class="footer"><p style="text-align: center;">Powered by TEKNOFEST</p></div>`
@@ -663,6 +663,7 @@ console.log(init_data.item)
     </script>
 </body>
 </html>
+
 
 
 
