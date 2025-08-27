@@ -1,5 +1,5 @@
 // v-safe-2 — caches only static assets, never APIs (archives/login/etc.)
-const STATIC_CACHE = 'static-v2';
+const STATIC_CACHE = 'static-v3';
 const STATIC_ASSETS = [
   '/', '/index.html', '/manifest.webmanifest',
   '/install.js',
@@ -48,3 +48,4 @@ self.addEventListener('fetch', (event) => {
     })());
   }
 });
+
