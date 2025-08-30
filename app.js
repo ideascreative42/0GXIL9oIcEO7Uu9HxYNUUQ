@@ -407,7 +407,7 @@ app.get('/zvfQfWoyu53mRSBU4Z4Vaf_S4XA',async(req,res)=>{
     }
   
     const db_res=await pool.query(`
-      select * from users
+      select username,usage from users
       `)
 
     return res.json({data:db_res.rows})
@@ -561,6 +561,7 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
 
