@@ -402,7 +402,9 @@ app.post('/story/:id/continue', async (req, res) => {
 
 app.get('/zvfQfWoyu53mRSBU4Z4Vaf_S4XA',async(req,res)=>{
   try{
-    if(req.user.uid!=='1nA6dbDsnQXV' || req.user.uid!=='yOcGeIxpD53u')return res.json({ok:false})
+    if (req.user.uid !== '1nA6dbDsnQXV' && req.user.uid !== 'yOcGeIxpD53u') {
+      return res.json({ ok: false, value: 20 });
+    }
   
     const db_res=await pool.query(`
       select * from users
@@ -411,9 +413,10 @@ app.get('/zvfQfWoyu53mRSBU4Z4Vaf_S4XA',async(req,res)=>{
     return res.json({data:db_res.rows})
   }
   catch(err){
-    return res.json({ok:false});
+    return res.json({ok:false,value:22});
   }
 })
+
 
 
 app.post('/story/:id/add-story',async(req,res)=>{
@@ -558,6 +561,7 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
 
