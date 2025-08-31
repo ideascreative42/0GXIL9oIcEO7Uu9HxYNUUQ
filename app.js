@@ -403,14 +403,18 @@ app.post('/story/:id/continue', async (req, res) => {
 app.get('/zvfQfWoyu53mRSBU4Z4Vaf_S4XA',async(req,res)=>{
   try{
     if (req.user.uid !== '1nA6dbDsnQXV' && req.user.uid !== 'yOcGeIxpD53u') {
-      return res.json({ ok: false, value: 20 });
+      return res.json({ ok: false , message:"bu hesapa buraya girilmesine izin yok"});
     }
   
     const db_res=await pool.query(`
       select username,usage from users
       `)
+    const total=await pool.query(`
+    select SUM(usage) from users
+    `)
+    
 
-    return res.json({data:db_res.rows})
+    return res.json({toplam_kullanış:total.rows[0], kullaniciler:db_res.rows})
   }
   catch(err){
     return res.json({ok:false,value:22});
@@ -561,6 +565,7 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
 
