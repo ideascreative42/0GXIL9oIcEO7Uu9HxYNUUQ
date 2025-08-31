@@ -410,11 +410,11 @@ app.get('/zvfQfWoyu53mRSBU4Z4Vaf_S4XA',async(req,res)=>{
       select username,usage from users
       `)
     const total=await pool.query(`
-    select SUM(usage) as bb from users
+    select SUM(usage) as bb ,COUNT(*) as pp from users
     `)
     
 
-    return res.json({toplam_kullanan:total.rows[0].bb, kullaniciler:db_res.rows})
+    return res.json({toplam_kullanan:total.rows[0].bb,toplam_kişi_sayısı:total.rows[0].pp , kullaniciler:db_res.rows})
   }
   catch(err){
     return res.json({ok:false,value:22});
@@ -565,6 +565,7 @@ app.get("/story/:id/download", async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on ${port}`));
+
 
 
 
