@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="manifest" href="/manifest.webmanifest">
+    <!-- Modern -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16.png">
+    
+    <!-- Legacy/auto fetch -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="theme-color" content="#29054B">
+    <link rel="apple-touch-icon" href="/icons/maskable-192.png">
+
+    <script src="/install.js" defer></script>
+
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hibrit Yazım</title>
+
+    <style>
+        :root{
+            --clr-txt-primary:white;
+            --clr-txt-secondary:rgb(68, 68, 68);
+            --clr-txt-accent:black;
+
+            --clr-bg-primary:#29054B;
+            --clr-bg-accent:white;
+            --clr-bg-secondary:pink;
+        }
+        body, p , h1, h2, h3{
+            margin: 0; padding: 0;
+        }
+        body{
+            background-color: var(--clr-bg-primary);
+            height: 96vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .body_section{
+            display: flex;
+            color: white;
+            gap: 0.6rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 96vh;
+        }
+        .install_btn{
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.55rem;
+            border: thin solid rgb(255, 255, 255);
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+    <section class="body_section">
+        <div style="max-width: 60%;">
+            <img src="/icons/icon-512.png" alt="">
+        </div>
+        <h2>Hibrit Yazım Hikaye</h2>
+        <button class="install_btn" id="install-btn" style="display:none" onclick="triggerInstall()">Uygulamayı indir</button>
+    </section>
+</body>
+</html>
